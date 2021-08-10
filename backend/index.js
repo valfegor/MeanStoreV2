@@ -26,7 +26,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 //esta es la ruta que va a utilizar nuestra aplicacion
-app.use("/api/role",Product);
+app.use("/api/product",Product);
 app.listen(process.env.PORT,()=>console.log("Backend Server Running  Ok On Port",process.env.PORT))
 
 DATABASECONNECTION();
