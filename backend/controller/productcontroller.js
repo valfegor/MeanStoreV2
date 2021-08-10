@@ -4,9 +4,18 @@ const Product = require("../models/product");
 const registerProduct = async (req,res)=>{
     if(!req.body.name || !req.body.code || !req.body.price) return res.status(401).send("You have to fill all the camps so please");
 
-    const existinProduct = await Product.findOne({name:req.body.name}||{code:req.body.code});
+    const existinProduct = await Product.findOne({name:req.body.name});
 
-    if(existinProduct) return res.status(401).send("Sorry you have the same code and name");
+
+    const existingCode = await Product.findOne({code:req.body.code});
+
+    if(existingCode && existinProduct) return res.status(401).send("That product its already created , please check");
+
+    if(existinProduct) return res.status(401).send("You have one product with the same name in your stock");
+
+    if(existingCode) return res.status(401).send("You have one product with the same code in your stock");
+
+    
 
     const product = new Product({
       name: req.body.name,
