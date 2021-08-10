@@ -11,6 +11,26 @@ const registerStore = async (req,res) =>{
 
     const store = new Store ({
         name: req.body.name,
-        
-    })
+        city: req.body.city,
+        location: req.body.location,
+        dbstatus:true,
+    });
+
+    const result = store.save();
+
+    if(result) return res.status(401).send("Sorry please try again");
+
+    return res.status(201).send({store});
 }
+
+
+
+const listStore = async (req,res)=>{
+    const store = await Store.find();
+
+    if(!store) return res.status(401).send("Sorry you dont have any products");
+
+    return res.status(201).send({store});
+}
+
+module.exports = {registerStore,listStore}
