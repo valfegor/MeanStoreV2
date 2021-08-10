@@ -12,6 +12,7 @@ const registerProduct = async (req,res)=>{
       name: req.body.name,
       price: req.body.price,
       code: req.body.code,
+      description:req.body.description,
       dbstatus:true,  
     });
 

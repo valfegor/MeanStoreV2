@@ -18,7 +18,7 @@ const registerStore = async (req,res) =>{
 
     const result = store.save();
 
-    if(result) return res.status(401).send("Sorry please try again");
+    if(!result) return res.status(401).send("Sorry please try again");
 
     return res.status(201).send({store});
 }
