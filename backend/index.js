@@ -16,11 +16,14 @@ require('dotenv').config();
 //usamos express en nuestra aplicacion.
 
 const app = express();
+const Product = require('../backend/routes/productroutes');
 
 //como todo lo que quiero va a retornar un json debo decirle al codigo.
 app.use(express.json());
 
 app.use(cors());
+
+app.use("api/product", Product);
 
 //es hora de utilizar el listen para que nuestro backend se conecte.
 //el app.listen utilizamos nuestro archivo .env recordando que va a utilizar el puerto 
