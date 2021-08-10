@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 
 const productSchema = new mongoose.Schema({
     name:String,
-    price:Float,
-    code:Integer,
+    price:Number,
+    code:String,
     description:String,
     date:{type:Date , default:Date.now},
     bdstatus:Boolean,

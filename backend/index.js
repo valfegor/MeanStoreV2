@@ -1,34 +1,32 @@
-//exportamos nuestra libreria de express.
+//utilizamos nuestra libreria de express , para que nos ayude con el servidor
 
-const express = require('express');
+const express = require("express");
 
-//exportamos nuestra libreria de cors.
+//llamamos nuestro cors para que nos ayude a validar que todo este correctamente si algo viene desde un framework o que tampoco sea inyeccion de codigo.
 
-const cors = require('cors');
+const cors = require("cors");
 
-//exportamos nuestra conexion a la base de datos.
-//de esta manera ya cargamos nuestra database
-const {DATABASECONNECTION} = require('../backend/bd/bd');
+//de esta manera cargamos nuestra conexion a mongo
+const {DATABASECONNECTION} = require('./bd/bd');
 
-//no olvidar siempre importar nuestra libreria de dot env.
+//aqui llamo a la ruta con la variable ROle
+const Product = require("./routes/productroutes");
+
+//requiere la libreria que instalamos dotenv para configurar todas las variables de entorno
+//si no esta esta linea genera fallos a la hora de generar los archivos.
+
 require('dotenv').config();
 
-//usamos express en nuestra aplicacion.
-
+//aqui se construye el servidor express
 const app = express();
-const Product = require('../backend/routes/productroutes');
 
-//como todo lo que quiero va a retornar un json debo decirle al codigo.
+//nuestro servidor va a utilizar todo lo de express , va a utilizar formato .json
+//las reglas de backend seran utilizadas por cors
+
 app.use(express.json());
-
 app.use(cors());
-
-app.use("api/product", Product);
-
-//es hora de utilizar el listen para que nuestro backend se conecte.
-//el app.listen utilizamos nuestro archivo .env recordando que va a utilizar el puerto 
+//esta es la ruta que va a utilizar nuestra aplicacion
+app.use("/api/role",Product);
 app.listen(process.env.PORT,()=>console.log("Backend Server Running  Ok On Port",process.env.PORT))
-
-//llamamos a nuestra coneccion a la base de datos.
 
 DATABASECONNECTION();

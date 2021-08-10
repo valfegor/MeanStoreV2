@@ -4,6 +4,8 @@ const router = express.Router();
 
 const ProductController = require('../controller/productcontroller');
 
-router.post('/registerProduct',ProductController.registerProduct);
-router.get('/listProduct',ProductController.listProduct);
+router.post('/registerRole',ProductController.registerProduct);
+//http://localhost:3001/api/role/listrole
+router.get('/listRole',ProductController.listProduct);
 
+module.exports = router;
